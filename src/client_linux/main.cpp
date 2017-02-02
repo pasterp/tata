@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <stdio.h>
+
 
 #include "asio.hpp"
 
@@ -22,11 +24,13 @@ int main(){
         asio::error_code error;
 
         int len = s.read_some(asio::buffer(buffer), error);
-        std::cout << "Reçu " << len << " caractères" << std::endl;
+        std::cout << "Reçu " << len << " caractères: ";
 
         if(error == asio::error::eof) //On a été déconnecté
             break;
-
+        else if (error)
+            throw asio::system_error(error);
+        printf("%150.*s", len, buffer);
     }
 
 
