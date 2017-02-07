@@ -1,0 +1,19 @@
+%table.uk-table.uk-table-striped
+    %thead
+        %tr
+            %th ID
+            %th Pays
+            %th IP
+            %th Port
+            %th Actions
+    %tbody
+        - @clients.each do |client|
+            %tr
+                %td= client.id
+                %td= client.getLocation
+                %td= client.getIp
+                %td= client.getPort
+                %td
+                    .uk-button-group
+                        %a.uk-button.uk-button-primary(href="/Ping/#{client.id}") Ping
+                        %a.uk-button.uk-button-primary(href="/Disconnect/#{client.id}") Disconnect
